@@ -1,8 +1,12 @@
-import React from 'react'
+// import UsersList from '@components/UserList'
+import UsersFeed from '@components/UsersFeed'
 
 const AppPage = () => {
   return (
-    <div>AppPage</div>
+    <div>
+      App Page 
+    <UsersFeed />
+    </div>
   )
 }
 
