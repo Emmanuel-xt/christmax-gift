@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import {signIn} from 'next-auth/react'
 
 const Signin = () => {
   const router = useRouter();
@@ -18,24 +19,25 @@ const Signin = () => {
 
     try {
       console.log("submitting with values:", { username });
-      const response = await fetch("/api/auth/registerUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-        }),
-      });
+      const response = await signIn('credentials' , {
+        username,
+        redirect: false,
+      })
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("User SignUp was Successful");
-        router.push("/app");
+      if (response.error) {
+        console.log('failed to register user' , response.error)
       } else {
-        const errorData = await response.json();
-        console.error("failed to SignUp", errorData.error);
+        console.log('user registerd succefully');
+          router.push("/app");
       }
+
+      // if (response.ok) {
+      //   const data = await response.json();
+      //   console.log("User SignUp was Successful");
+      // } else {
+      //   const errorData = await response.json();
+      //   console.error("failed to SignUp", errorData.error);
+      // }
     } catch (error) {
       console.error("Error during SignUp", error);
     }
@@ -57,8 +59,9 @@ const Signin = () => {
             onChange={handleChange}
             id=""
             placeholder="Input a Cool name"
-            className="text-black outline-none rounded p-1 border border-4 border-green-700"
+            className="text-black outline-none rounded p-1 border-4 border-green-700"
           />
+          {/* <button type="submit">Register</button> */}
           <button type="submit" className="border">Register</button>
         </form>
         <p className="text-white text-sm font-thin">

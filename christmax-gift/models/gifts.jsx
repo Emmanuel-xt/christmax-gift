@@ -11,6 +11,6 @@ const giftSchema = new Schema({
   },
 });
 
-const Gift = models.Game || model("Gift", giftSchema);
+const Gift = models.Gift || model("Gift", giftSchema);
 
 export default Gift;

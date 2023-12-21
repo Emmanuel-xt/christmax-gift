@@ -14,7 +14,7 @@ export const POST = async (request) => {
 
     console.log("Checking for existing user...");
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ username : credentials });
 
     if (existingUser) {
       console.log("User with this Username already exists");
@@ -24,6 +24,7 @@ export const POST = async (request) => {
     }
 
     console.log("Creating a new user...");
+
     const newUser = await User.create({
       username: username,
     });

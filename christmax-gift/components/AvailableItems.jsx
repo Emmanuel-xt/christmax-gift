@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 
-const AvailableItems = ({ onSelectItem }) => {
+const AvailableItems = () => {
   const [availableItems, setAvailableItems] = useState([]);
 
   useEffect(() => {
