@@ -4,10 +4,31 @@
 
 
 .landing{
-  background-image: url(../public/assets/red.jpeg);
+  background-image: url(../public/assets/reder.jpeg);
   background-size: contain;
   background-attachment: fixed;
+  
+}
+.flower{
+  background-image: url(../public/assets/flower.jpeg);
+  background-size: contain;
+  
+}
+.app{
+  background-image: url(../public/assets/white.jpeg);
+  background-size: contain;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  overflow-y: auto;
+  
+}
+.scro{
+  overflow-y: auto;
 
+}
+.btn{
+  position: absolute;
+  bottom: 0px;
 }
 .signin {
   width: 100%;

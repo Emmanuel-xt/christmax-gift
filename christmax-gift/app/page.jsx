@@ -13,11 +13,11 @@ const Home = () => {
         Suprise a Friend by sharing Cool Chrismax Wishes or Gifts
       </p>
       <About />
-      <h2 className="text-3xl">🎄 Join the Festive Code Fest Now!</h2>
-      <p className="">
+      <h2 className="text-2xl text-white font-bold">🎄 Join the Festive Code Fest Now!</h2>
+      <p className="text-green-700">
         You are just a Click Away, Register Now to Get Started{" "}
       </p>
-      <button className="bg-red-600 rounded-lg px-3 py-1 text-white">
+      <button className="bg-yellow-600 rounded-lg px-3 py-1 text-white">
         <Link href='/signin'>Register</Link>
       </button>
     </section>

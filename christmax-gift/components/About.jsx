@@ -36,7 +36,7 @@ const About = () => {
       <h1 className="text-2xl font-bold text-yellow-500">How It Works</h1>
       {steps.map((step) => (
         <div
-          className="flex flex-col items-center justify-center border w-[50%] p-4 gap-3"
+          className="flower flex flex-col items-center justify-center border w-[50%] p-4 gap-3"
           key={step.no}
         >
           <div className="bg-green-500 rounded-full p-1">
@@ -48,8 +48,8 @@ const About = () => {
               className=""
             />
           </div>
-          <h1 className=" text-red-500 font-bold text-center text-sm">{step.title}</h1>
-          <p className="font-light text-sm text-center">{step.description}</p>
+          <h1 className=" text-red-500 font-bold text-center text-lg">{step.title}</h1>
+          <p className="text-sm text-center font-bold">{step.description}</p>
         </div>
       ))}
     </div>
