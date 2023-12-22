@@ -22,6 +22,7 @@ const RecipientProfile = () => {
   }, [session]);
   return (
     <div className=" flex flex-col justify-center items-center">
+      
         {recievedGifts.map((gift) => (
           <div className="flex flex-col gap-3 justify-center items-center border rounded p-2 mt-2 w-[70%]" key={gift._id}>
             <p className="text-green-400 font-bold">{gift.senderName} sent you a {gift.GiftTitle}</p>
