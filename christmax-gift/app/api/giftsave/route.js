@@ -1,4 +1,4 @@
-import { connectToDB } from "@_utils/database";
+import { connectToDB } from "@utils/database";
 import SentGift from "@models/sentGift";
 
 export const POST = async (req) => {

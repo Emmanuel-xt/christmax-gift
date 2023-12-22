@@ -1,6 +1,6 @@
 // pages/api/items.js
 
-import { connectToDB } from "@_utils/database";
+import { connectToDB } from "@utils/database";
 import Gift from "@models/gifts";
 
 export const POST = async (req) => {

@@ -1,14 +1,14 @@
-import { connectToDB } from "@_utils/database";
+import { connectToDB } from "@utils/database";
 import Gift from "@models/gifts";
 
 export const GET = async (request) => {
-  console.log('Api call detected');
+  console.log("Api call detected");
   try {
-    console.log('connecting to db');
+    console.log("connecting to db");
     await connectToDB();
-    console.log('fetching gifts');
+    console.log("fetching gifts");
     const gifts = await Gift.find({});
-    console.log('Gifts found, now sending them to the frontend');
+    console.log("Gifts found, now sending them to the frontend");
 
     // console.log('The gifts are: ', gifts);
     return new Response(JSON.stringify(gifts), { status: 200 });

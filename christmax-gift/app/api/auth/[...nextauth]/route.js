@@ -1,4 +1,4 @@
-import { connectToDB } from "@_utils/database";
+import { connectToDB } from "@utils/database";
 import User from "@models/Users";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -15,7 +15,7 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
 
-      async authorize (credentials) {
+      async authorize(credentials) {
         console.log("credentials: ", credentials);
         try {
           await connectToDB();
@@ -66,12 +66,12 @@ const handler = NextAuth({
       //   "session=",
       //   session , 'JWT PART ENDED ---------------'
       // );
-      if(user){
-        return{
+      if (user) {
+        return {
           ...token,
-          id:user.id,
+          id: user.id,
           name: user.username,
-      }
+        };
       }
       return token;
     },
@@ -85,14 +85,13 @@ const handler = NextAuth({
       //   "session=",
       //   session
       // );
-      return{
+      return {
         ...session,
         user: {
-          id:token.id,
-          name:token.name
-
-        }
-      }
+          id: token.id,
+          name: token.name,
+        },
+      };
       return session;
     },
   },
