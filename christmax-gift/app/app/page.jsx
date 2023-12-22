@@ -33,8 +33,8 @@ const AppPage = () => {
     setSelectedItem(item);
   };
 
-  const handleSendGift = (selectedItem, randomlySelectedUser) => {
-    console.log("Sending Gift:", selectedItem,'from',session?.user , "to Users:", randomlySelectedUser);
+  const handleSendGift = (selectedItem, recipient) => {
+    console.log("Sending Gift:", selectedItem,'from',session?.user , "to Users:", recipient);
     setSelectedItem(null);
   };
 

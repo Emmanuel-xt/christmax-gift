@@ -5,10 +5,13 @@ import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 // import { FaCheck } from "react-icons/fa6";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
-const SendGiftForm = ({ selectedItem, onSendGift }) => {
+const SendGiftForm = ({ selectedItem, setSelectedItems, onSendGift }) => {
   const [users, setusers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const { data: session } = useSession();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -21,11 +24,48 @@ const SendGiftForm = ({ selectedItem, onSendGift }) => {
     fetchUsers();
   }, []);
 
-  const handleSendGift = () => {
-    const randomlySelectedUserIndex = Math.floor(Math.random() * selectedUsers.length);
-  const randomlySelectedUser = selectedUsers[randomlySelectedUserIndex]
+  const handleSendGift = async () => {
+    const randomlySelectedUserIndex = Math.floor(
+      Math.random() * selectedUsers.length
+    );
+    const recipient = selectedUsers[randomlySelectedUserIndex];
 
-    onSendGift(selectedItem, randomlySelectedUser);
+    const payload = {
+      senderId: session?.user.id,
+      senderName: session?.user.name,
+      recipientId: recipient._id,
+      recipientUserName: recipient.username,
+      GiftId: selectedItem._id,
+      GiftTitle: selectedItem.name,
+      Gift: selectedItem.description,
+    };
+
+    try {
+      // const response = await axios.post('/api/giftsave' , payload)
+      const response = await fetch("/api/giftsave", {
+        method: "POST",
+        body: JSON.stringify({
+          payload: payload,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const success = response.ok;
+
+      if (success) {
+        console.log("Gift sent succesfully", response);
+      } else {
+        throw new Error("failed to save the sent gift");
+      }
+
+      setSelectedItems(null);
+    } catch (error) {
+      console.log("", error);
+    }
+
+    onSendGift(selectedItem, recipient);
   };
 
   return (
@@ -78,14 +118,13 @@ const SendGiftForm = ({ selectedItem, onSendGift }) => {
                 </Listbox.Option>
               ))}
             </Listbox.Options>
-            
           </Transition>
-            <button
-                className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600"
-                onClick={handleSendGift}
-              >
-                Send Gift
-              </button>
+          <button
+            className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600"
+            onClick={handleSendGift}
+          >
+            Send Gift
+          </button>
         </div>
       </Listbox>
     </div>
@@ -93,13 +132,6 @@ const SendGiftForm = ({ selectedItem, onSendGift }) => {
 };
 
 export default SendGiftForm;
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 
