@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.landing{
+  background-image: url(../public/assets/red.jpeg);
+  background-size: contain;
+  background-attachment: fixed;
+
+}
 .signin {
   width: 100%;
   position: relative;
