@@ -1,10 +1,15 @@
 "use client";
 // import AddItems from '@components/AddItems'
 import SendGiftForm from "@components/SendGiftForm";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 
 const AppPage = () => {
+  const {data : session} = useSession()
+  // const user = session?.user.username
+  console.log('session name is' , session?.user)
+
   const [availableItems, setAvailableItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -28,13 +33,19 @@ const AppPage = () => {
     setSelectedItem(item);
   };
 
-  const handleSendGift = (selectedItem, selectedUsers) => {
-    console.log("Sending Gift:", selectedItem, "to Users:", selectedUsers);
+  const handleSendGift = (selectedItem, randomlySelectedUser) => {
+    console.log("Sending Gift:", selectedItem,'from',session?.user , "to Users:", randomlySelectedUser);
     setSelectedItem(null);
   };
+
+  // if(!session){
+  //   return(
+  //     <div className="">Loading ....</div>
+  //   )
+  // }
   return (
     <section className="app  w-screen h-screen">
-      App Page
+      <div className=""> <p className="text-center font-bold text-2xl text-green-700"> Hi {session?.user.name} , Gift A fellow Techi Now</p></div>
       <div className="flex flex-col items-center max-h-32">
         {availableItems.length > 0 ? (
           availableItems.map((item) => (

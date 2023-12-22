@@ -22,7 +22,10 @@ const SendGiftForm = ({ selectedItem, onSendGift }) => {
   }, []);
 
   const handleSendGift = () => {
-    onSendGift(selectedItem, selectedUsers);
+    const randomlySelectedUserIndex = Math.floor(Math.random() * selectedUsers.length);
+  const randomlySelectedUser = selectedUsers[randomlySelectedUserIndex]
+
+    onSendGift(selectedItem, randomlySelectedUser);
   };
 
   return (
@@ -75,10 +78,16 @@ const SendGiftForm = ({ selectedItem, onSendGift }) => {
                 </Listbox.Option>
               ))}
             </Listbox.Options>
+            
           </Transition>
+            <button
+                className="mt-2 px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600"
+                onClick={handleSendGift}
+              >
+                Send Gift
+              </button>
         </div>
       </Listbox>
-        <button onClick={handleSendGift}>Send Gift</button>
     </div>
   );
 };
